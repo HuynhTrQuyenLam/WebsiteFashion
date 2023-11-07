@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WebFashion.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="page-header">
+    <h2 class="header-title">Products</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Products</a>
+            <span class="breadcrumb-item active">Danh sách Producst</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+                    <div class="m-b-10 m-r-15">
+                        <select class="custom-select" style="min-width: 180px;">
+                            <option selected>Catergory</option>
+                            <option value="all">All</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-right">
+                <a href="/Product/Create" class="btn btn-primary">
+                    <i class="anticon anticon-plus-circle m-r-5"></i>
+
+                    <span>Add Product</span>
+                </a>
+            </div>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="table-responsive">
+                <table class="table table-hover e-commerce-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                # @Html.DisplayFor(modelItem => item.ProductID)
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img class="img-fluid rounded" src="~/Content/Images/@item.ImagePro" style="max-width: 60px" alt="">
+                                    <h6 class="m-b-0 m-l-10">@Html.DisplayFor(modelItem => item.NamePro)</h6>
+                                </div>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Category1.NameCate)</td>
+                            <td>
+                                @string.Format("{0:#,##0} VND", item.Price)
+                            </td>
+
+                            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                            <td class="text-right">
+                                <a href="@Url.Action("Details", new { id = item.ProductID })" class="btn btn-icon btn-hover btn-sm btn-rounded">
+                                    <i class="anticon anticon-info"></i>
+                                </a>
+                                <a href="@Url.Action("Edit", new { id = item.ProductID })" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right">
+                                    <i class="anticon anticon-edit"></i>
+                                </a>
+                                <a href="@Url.Action("Delete", new { id = item.ProductID })" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right">
+                                    <i class="anticon anticon-delete"></i>
+                                </a>
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        }
+
+    </div>
+</div>

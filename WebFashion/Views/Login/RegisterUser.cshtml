@@ -1,0 +1,104 @@
+﻿@model WebFashion.Models.Customer
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sign Up</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Content/assets/images/logo/favicon.png">
+
+    <!-- page css -->
+    <!-- Core css -->
+    <link href="~/Content/assets/css/app.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="app">
+        <div class="container-fluid p-h-0 p-v-20 bg full-height d-flex" style="background-image: url('/Content/assets/images/others/login-3.png')">
+            <div class="d-flex flex-column justify-content-between w-100">
+                <div class="container d-flex h-100">
+                    <div class="row align-items-center w-100">
+                        <div class="col-md-7 col-lg-5 m-h-auto">
+                            <div class="card shadow-lg">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between m-b-30">
+                                        <img class="img-fluid" alt="" src="assets/images/logo/logo.png">
+                                        <h2 class="m-b-0">Sign Up</h2>
+                                    </div>
+                                    @using (Html.BeginForm("RegisterUser", "login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                <div>
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-group">
+                                        <label class="font-weight-semibold" for="userName">Fullname:</label>
+                                        <p>@Html.TextBoxFor(model => model.NameCus, new { @class = "form-control", type = "text", placeholder = "Fullname" })</p>
+                                        <p>@Html.ValidationMessageFor(model => model.NameCus)</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-semibold" for="userName">Username:</label>
+                                        <p>@Html.TextBoxFor(model => model.AccountCus, new { @class = "form-control", type = "text", placeholder = "Username" })</p>
+                                        <p>@Html.ValidationMessageFor(model => model.AccountCus)</p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="font-weight-semibold" for="password">Password:</label>
+                                        @*<input type="password" class="form-control" id="password" placeholder="Password">*@
+                                        <p>@Html.PasswordFor(model => model.PassCus, new { @class = "form-control", type = "password", placeholder = "Password" })</p>
+                                        <p>@Html.ValidationMessageFor(model => model.PassCus)</p>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-semibold" for="confirmPassword">Confirm Password:</label>
+                                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+                                    </div>
+                                    @if (ViewBag.ErrorRegister != null)
+                                    {
+                                        <p style="color:red;font-weight:bold;">@ViewBag.ErrorRegister</p>
+                                    }
+                                    <div class="form-group">
+                                        <div class="d-flex align-items-center justify-content-center p-t-15">
+                                            <button type="submit" value="TẠO TÀI KHOẢN" class="btn btn-primary">Sign In</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-none d-md-flex p-h-40 justify-content-between">
+                    <span class="">© 2019 ThemeNate</span>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a class="text-dark text-link" href="~/Content/">Legal</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="text-dark text-link" href="~/Content/">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Core Vendors JS -->
+    <script src="~/Content/assets/js/vendors.min.js"></script>
+
+    <!-- page js -->
+    <!-- Core JS -->
+    <script src="~/Content/assets/js/app.min.js"></script>
+
+</body>
+
+</html>

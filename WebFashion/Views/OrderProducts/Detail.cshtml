@@ -1,0 +1,75 @@
+﻿@model WebFashion.Models.OrderPro
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="page-header">
+    <h2 class="header-title">Orders List</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="/OrderProducts/Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Order List</a>
+            <span class="breadcrumb-item active">Orders Detail</span>
+        </nav>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="tab-content m-t-15">
+        <div class="tab-pane fade show active" id="product-overview">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Info Customer</h4>
+                    <div class="table-responsive">
+                        <table class="product-info-table m-t-20">
+                            <tbody>
+                                <tr>
+                                    <td>ID Cus:</td>
+                                    <td class="text-dark font-weight-semibold"> @Html.DisplayFor(model => model.IDCus)</td>
+                                </tr>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td class="text-dark font-weight-semibold"> @Html.DisplayFor(model => model.NameCus)</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone:</td>
+                                    <td>	@Html.DisplayFor(model => model.PhoneCus)</td>
+                                </tr>
+                                <tr>
+                                    <td>Address:</td>
+                                    <td>	@Html.DisplayFor(model => model.AddressDeliverry)</td>
+                                </tr>
+                                <tr>
+                                    <td>Date Order:</td>
+                                    <td>	@Html.DisplayFor(model => model.DateOrder)</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ID Product</th>
+                        <th>Name Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @Html.Action("Partial_OrderDetail", "OrderProducts", new { id = Model.ID })
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

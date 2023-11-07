@@ -1,0 +1,90 @@
+﻿@model WebFashion.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="page-header">
+    <h2 class="header-title">Product</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="/Product/Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Product</a>
+            <span class="breadcrumb-item active">Tạo mới Product</span>
+        </nav>
+    </div>
+</div>
+
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <form>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="page-header no-gutters has-tab">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#product-edit-basic">Thông tin</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content m-t-15">
+            <div class="tab-pane fade show active" id="product-edit-basic">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="inputState">Tên sản phẩm</label>
+                            @Html.EditorFor(model => model.NamePro, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên sản phẩm" } })
+                            @Html.ValidationMessageFor(model => model.NamePro, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="inputState">Danh mục</label>
+                            @Html.DropDownListFor(model => model.Category, (SelectList)ViewBag.listCategory, new { @class = "form-control", id = "inputState" })
+                            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="inputState">Giá sản phẩm</label>
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "Giá sản phẩm" } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="inputState">Số lượng</label>
+                            <input type="number" min="0" @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "Số lượng" } }) @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold">Trạng thái</label>
+                            <select class="custom-select" name="Status">
+                                <option value="0">Có sẵn</option>
+                                <option value="1">Hết hàng</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold" for="inputState">Mô tả</label>
+                            @Html.EditorFor(model => model.DecriptionPro, new { htmlAttributes = new { @class = "form-control", placeholder = "Mô tả" } })
+                            @Html.ValidationMessageFor(model => model.DecriptionPro, "", new { @class = "textarea" })
+
+                            <div id="editor">
+                                <p><br></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-semibold">Hình ảnh</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="UploadImage" id="formFile" onchange="ChangeImage(this, document.getElementById('previewImg'))">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class=" col-12 ">
+                            <input type="submit" value="Tạo mới" class="btn btn-primary" style="float: right" />
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+}
+
+

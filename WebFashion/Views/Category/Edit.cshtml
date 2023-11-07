@@ -1,0 +1,54 @@
+﻿@model WebFashion.Models.Category
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="page-header">
+    <h2 class="header-title">Category</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="/Category/Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Category</a>
+            <span class="breadcrumb-item active">Tạo mới Category</span>
+        </nav>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <form>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="page-header no-gutters has-tab">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#product-edit-basic">Thông tin</a>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content m-t-15">
+            <div class="tab-pane fade show active" id="product-edit-basic">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.IDCate,
+                                    new { htmlAttributes = new { @class = "form-control", placeholder = "IDCate" } })
+                            @Html.ValidationMessageFor(model => model.IDCate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.NameCate,
+                                    new { htmlAttributes = new { @class = "form-control", placeholder = "Tên Category" } })
+                            @Html.ValidationMessageFor(model => model.NameCate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class=" col-12 ">
+                            <input type="submit" value="Lưu" class="btn btn-primary" style="float: right" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+}
+
+
