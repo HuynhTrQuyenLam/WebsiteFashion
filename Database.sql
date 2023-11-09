@@ -46,6 +46,8 @@ CREATE TABLE [dbo].[OrderPro] (
     [NameCus]          NVARCHAR (250) NULL,
     [PhoneCus]	     NVARCHAR (15)  NULL,
     [AddressDeliverry] NVARCHAR (MAX) NULL,
+	[Status]			NVARCHAR(50) NULL,
+	[IsPaid]			bit NULL,
     PRIMARY KEY CLUSTERED ([ID] ASC),
     FOREIGN KEY ([IDCus]) REFERENCES [dbo].[Customer] ([IDCus])
 );
