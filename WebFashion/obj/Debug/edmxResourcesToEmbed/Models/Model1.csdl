@@ -56,6 +56,8 @@
     <Property Name="NameCus" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="PhoneCus" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
     <Property Name="AddressDeliverry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="isPaid" Type="Boolean" />
     <NavigationProperty Name="Customer" Relationship="Self.FK__OrderPro__IDCus__403A8C7D" FromRole="OrderPro" ToRole="Customer" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__IDOrd__440B1D61" FromRole="OrderPro" ToRole="OrderDetail" />
   </EntityType>

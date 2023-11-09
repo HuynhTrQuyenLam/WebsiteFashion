@@ -36,10 +36,8 @@ namespace WebFashion.Controllers
             }
             return cart;
         }
-        // Thêm sản phẩm vào giỏ hàng
         public ActionResult AddToCart(int id)
         {
-            // lấy sản phẩm theo id
             var _pro = db.Products.SingleOrDefault(s => s.ProductID == id);
             if (_pro != null)
             {
@@ -56,7 +54,6 @@ namespace WebFashion.Controllers
 
             return RedirectToAction("ShowCart", "ShoppingCart");
         }
-        // Xóa dòng sản phẩm trong giỏ hàng
         public ActionResult RemoveCart(int id)
         {
             Cart cart = Session["Cart"] as Cart;
@@ -65,8 +62,7 @@ namespace WebFashion.Controllers
             return RedirectToAction("ShowCart", "ShoppingCart");
         }
 
-        // Các phương thức cho thanh toán
-        public ActionResult CheckOut(FormCollection form)
+        public ActionResult CheckOut(FormCollection form, string payment = "")
         {
             try
             {
@@ -76,6 +72,8 @@ namespace WebFashion.Controllers
                 _order.NameCus = (form["NameCustomer"]);
                 _order.PhoneCus = (form["PhoneCustomer"]);
                 _order.AddressDeliverry = (form["AddressDeliverry"]);
+                _order.Status = "Processed";
+                _order.isPaid = true;
                 db.OrderProes.Add(_order);
                 foreach (var item in cart.Items)
                 {
@@ -87,7 +85,6 @@ namespace WebFashion.Controllers
                     _order_detail.UnitPrice = (double)item._product.Price;
                     _order_detail.Quantity = item._quantity;
                     db.OrderDetails.Add(_order_detail);
-                    //xử lý cập nhật lại số lượng tồn trong bảng Product
                     foreach (var p in db.Products.Where(s => s.ProductID == _order_detail.IDProduct)) //lấy ID Product đang có trong giỏ hàng
                     {
                         var update_quan_pro = p.Quantity - item._quantity; //số lượng tồn mới = số lượng tồn - số lượng đã mua
@@ -95,15 +92,22 @@ namespace WebFashion.Controllers
                     }
                 }
                 db.SaveChanges();
+                // Payment
+                if (payment == "momo")
+                {
+                    return RedirectToAction("PaymentWithMomo", "Payment");
+                }
                 cart.ClearCart();
-                return RedirectToAction("CheckOut_Success", "ShoppingCart");
+                return RedirectToAction("Message", new { mess = "Đặt hàng thành công" });
+
+                //return RedirectToAction("CheckOut_Success", "ShoppingCart");
+
             }
             catch
             {
                 return Content("Có sai sót! Xin kiểm tra lại thông tin"); ;
             }
         }
-        // Thông báo thanh toán thành công
         public ActionResult CheckOut_Success()
         {
             return View();
@@ -117,6 +121,10 @@ namespace WebFashion.Controllers
                 total_pro_item = cart.Total_product();
             ViewBag.AddToCart = total_pro_item;
             return PartialView("BagCart");
+        }
+        public ActionResult Payments()
+        {
+            return View();
         }
     }
 }

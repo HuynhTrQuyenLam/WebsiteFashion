@@ -26,6 +26,8 @@ namespace WebFashion.Models
         public string NameCus { get; set; }
         public string PhoneCus { get; set; }
         public string AddressDeliverry { get; set; }
+        public string Status { get; set; }
+        public Nullable<bool> isPaid { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

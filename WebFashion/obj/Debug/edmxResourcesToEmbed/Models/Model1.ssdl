@@ -52,6 +52,8 @@
     <Property Name="NameCus" Type="nvarchar" MaxLength="250" />
     <Property Name="PhoneCus" Type="nvarchar" MaxLength="15" />
     <Property Name="AddressDeliverry" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar" MaxLength="250" />
+    <Property Name="isPaid" Type="bit" />
   </EntityType>
   <EntityType Name="Products">
     <Key>
