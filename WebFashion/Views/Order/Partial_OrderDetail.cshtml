@@ -1,0 +1,21 @@
+﻿@model IEnumerable<WebFashion.Models.OrderDetail>
+@if (Model != null && Model.Any())
+{
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <p>@item.NamePro</p>
+            </td>
+            <td>
+                <h5>@item.Quantity</h5>
+            </td>
+            <td>
+                <p>@string.Format("{0:#,##0} VND", item.UnitPrice * item.Quantity)</p>
+            </td>
+        </tr>
+    }
+</tbody>
+}
+

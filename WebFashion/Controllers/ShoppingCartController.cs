@@ -24,6 +24,7 @@ namespace WebFashion.Controllers
                 return View(cart);
             else
                 return View("EmptyCart");
+
         }
         // Tạo mới giỏ hàng, nguồn được lấy từ Session
         public Cart GetCart()
@@ -43,6 +44,7 @@ namespace WebFashion.Controllers
             {
                 GetCart().Add_Product_Cart(_pro);
             }
+            ViewBag.Message = "Đã thêm vào giỏ hàng";
             return RedirectToAction("ShowCart", "ShoppingCart");
         }
         public ActionResult Update_Cart_Quantity(FormCollection form)
@@ -62,7 +64,7 @@ namespace WebFashion.Controllers
             return RedirectToAction("ShowCart", "ShoppingCart");
         }
 
-        public ActionResult CheckOut(FormCollection form, string payment = "")
+        public ActionResult CheckOut(FormCollection form)
         {
             try
             {
@@ -72,8 +74,8 @@ namespace WebFashion.Controllers
                 _order.NameCus = (form["NameCustomer"]);
                 _order.PhoneCus = (form["PhoneCustomer"]);
                 _order.AddressDeliverry = (form["AddressDeliverry"]);
-                _order.Status = "Processed";
-                _order.isPaid = true;
+                _order.Status = 0;
+                //_order.isPaid = true;
                 db.OrderProes.Add(_order);
                 foreach (var item in cart.Items)
                 {
@@ -92,15 +94,8 @@ namespace WebFashion.Controllers
                     }
                 }
                 db.SaveChanges();
-                // Payment
-                if (payment == "momo")
-                {
-                    return RedirectToAction("PaymentWithMomo", "Payment");
-                }
                 cart.ClearCart();
-                return RedirectToAction("Message", new { mess = "Đặt hàng thành công" });
-
-                //return RedirectToAction("CheckOut_Success", "ShoppingCart");
+                return RedirectToAction("CheckOut_Success", "ShoppingCart");
 
             }
             catch
@@ -108,6 +103,20 @@ namespace WebFashion.Controllers
                 return Content("Có sai sót! Xin kiểm tra lại thông tin"); ;
             }
         }
+
+        public ActionResult Confirmation()
+        {
+            int total_pro_item = 0;
+            Cart cart = Session["Cart"] as Cart;
+            if (cart != null)
+                total_pro_item = cart.Total_product();
+            ViewBag.AddToCart = total_pro_item;
+            if (total_pro_item > 0)
+                return View(cart);
+            else
+                return View("EmptyCart");
+        }
+
         public ActionResult CheckOut_Success()
         {
             return View();

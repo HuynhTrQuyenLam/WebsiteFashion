@@ -44,9 +44,10 @@ namespace WebFashion.Controllers
                 return Content("Lỗi tạo mới Category");
             }
         }
-        public ActionResult Detail(string id)
+        public ActionResult Details(int id)
         {
-            return View(db.Categories.Where(s => s.IDCate == id).FirstOrDefault());
+            var category = db.Categories.FirstOrDefault(c => c.Id == id);
+            return View(category);
         }
 
         public ActionResult Edit(string id)
@@ -88,6 +89,7 @@ namespace WebFashion.Controllers
                 return Content("Có sai sót! Xin kiểm tra lại thông tin");
             }
         }
+
 
     }
 }

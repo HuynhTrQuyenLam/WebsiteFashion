@@ -1,0 +1,87 @@
+﻿@model IEnumerable<WebFashion.Models.OrderPro>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<WebFashion.Models.OrderDetail> orderDetails = ViewBag.ListCategory as List<WebFashion.Models.OrderDetail>;
+
+}
+
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="category">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>Order Confirmation</h1>
+                <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Shop Category</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ end banner area ================= -->
+<!--================Order Details Area =================-->
+@foreach (var item in Model)
+{
+    <section class="order_details section-margin--small">
+        <div class="container">
+            <div class="row mb-12">
+                <div class="col-md-12">
+                    <div class="confirmation-card">
+                        <a href="/Order/Details/@item.ID" style="color: black" class="billing-title">Order Info #@item.ID</a>
+                        <table class="order-rable">
+                            <tr>
+                                <td>Order number</td>
+                                <td>: @item.ID</td>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                                <td>: @item.DateOrder</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>: </td>
+                            </tr>
+                            <tr>
+                                <td>Payment</td>
+                                <td>: Thanh toán khi nhận hàng</td>
+                            </tr>
+
+                        </table>
+                        @{
+                            if (@item.Status == 0)
+                            {
+                                <div style="text-align:right">
+                                    <a href="/Order/Cancel/@item.ID" type="button" class="btn btn-danger">Hủy đơn hàng</a>
+                                </div>
+
+                            }
+                            else if (@item.Status == 1)
+                            {
+                                <div style="text-align:right">
+                                    <button type="button" class="btn btn-primary">Đã xác nhận</button>
+                                </div>
+                            }
+                            else if (@item.Status == 2)
+                            {
+                                <div style="text-align:right">
+                                    <button type="button" class="btn btn-danger">Đã hủy đơn hàng</button>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+<!--================End Order Details Area =================-->

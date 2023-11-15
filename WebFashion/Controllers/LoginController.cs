@@ -75,6 +75,12 @@ namespace WebFashion.Controllers
                 return RedirectToAction("Index", "Product");
             }
         }
+       
+        public ActionResult LogOutUser()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult RegisterUser()
         {
             return View();
@@ -84,7 +90,7 @@ namespace WebFashion.Controllers
         {
             if (ModelState.IsValid)
             {
-                var check_ID = db.Customers.Where(s => s.NameCus == _cus.NameCus).FirstOrDefault();
+                var check_ID = db.Customers.Where(s => s.AccountCus == _cus.AccountCus).FirstOrDefault();
                 if (check_ID == null)
                 {
                     db.Configuration.ValidateOnSaveEnabled = false;
@@ -94,16 +100,11 @@ namespace WebFashion.Controllers
                 }
                 else
                 {
-                    ViewBag.ErrorRegister = "ID đã tồn tại";
+                    ViewBag.ErrorRegister = "Username đã tồn tại vui lòng nhập lại";
                     return View();
                 }
             }
             return View();
-        }
-        public ActionResult LogOutUser()
-        {
-            Session.Abandon();
-            return RedirectToAction("Index", "home");
         }
     }
 }

@@ -1,0 +1,96 @@
+﻿﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<WebFashion.Models.Product>
+@{
+    ViewBag.Title = "Shop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<WebFashion.Models.Category> categories = ViewBag.ListCategory as List<WebFashion.Models.Category>;
+    List<WebFashion.Models.Product> products = ViewBag.ListProduct as List<WebFashion.Models.Product>;
+
+}
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="blog">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>Product</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================ end banner area ================= -->
+<!-- ================ category section start ================= -->
+<section class="section-margin--small mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-5">
+                <div class="sidebar-categories">
+                    <div class="head">Browse Categories</div>
+                    <ul class="main-categories">
+                        <li class="common-filter">
+                            <form value="/Product/Index" action="#">
+                                <ul>
+                                    @Html.Action("CategoryPartial", "Category")
+                                </ul>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div class="col-xl-9 col-lg-8 col-md-7">
+                <!-- Start Best Seller -->
+                <section class="lattest-product-area pb-40 category-list">
+                    <div class="row">
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card text-center card-product">
+                                        <div class="card-product__img">
+                                            <img class="card-img" src="~/Content/Images/@item.ImagePro" alt="">
+
+                                            <ul class="card-product__imgOverlay">
+                                                <li>
+                                                    <a href="/ShoppingCart/AddToCart/@item.ProductID">
+                                                        <i class="ti-shopping-cart"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                        <div class="card-body">
+                                            <p>@item.Category1.NameCate</p>
+                                            <h4 class="card-product__title"><a href="/Home/Details/@item.ProductID">@item.NamePro</a></h4>
+                                            <p class="card-product__price">@item.Price.Value.ToString("#,##") ₫</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </section>
+                <!-- End Best Seller -->
+            </div>
+        </div>
+    </div>
+    <nav aria-label="..." style="text-align: center;">
+        <ul class="pagination pagination-sm justify-content-center">
+            <li class="page-item @if (Model.PageNumber == 1) { <text>disabled</text> }">
+                <a class="page-link" href="@Url.Action("Shop", "Home", new { page = 1 })" tabindex="-1">1</a>
+            </li>
+            @for (int i = 2; i <= Model.PageCount; i++)
+            {
+                <li class="page-item @if (Model.PageNumber == i) { <text>active</text> }">
+                    <a class="page-link" href="@Url.Action("Shop", "Home", new { page = i })">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+
+</section>
+<!-- ================ category section end ================= -->

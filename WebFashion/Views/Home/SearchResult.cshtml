@@ -6,102 +6,89 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="sec-banner bg0 p-t-80 p-b-50">
-</div>
-
-<section class="bg0 p-t-23 p-b-140">
-    <div class="container">
-        <div class="p-b-10">
-            <h3 class="ltext-103 cl5">
-                Product Overview
-            </h3>
-        </div>
-
-        <div class="flex-w flex-sb-m p-b-52">
-            <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-                <a href="/Home/Index" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-                    All Products
-                </a>
-                @{ Html.RenderAction("CategoryPartial", "Category");}
-
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="blog">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>Search</h1>
             </div>
-
-            <div class="flex-w flex-c-m m-tb-10">
-                <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-                    <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-                    <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-                    Search
-                </div>
-            </div>
-
-            <!-- Search product -->
-            <div class="dis-none panel-search w-full p-t-10 p-b-15">
-                @using (Html.BeginForm("SearchResult", "Home", FormMethod.Get))
-                {
-                    <div class="bor8 dis-flex p-l-15">
-                        <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" type="submit">
-                            <i class="zmdi zmdi-search"></i>
-                        </button>
-
-                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="SearchString" placeholder="Search">
-                    </div>
-                }
-            </div>
-
-            <!-- Filter -->
         </div>
-
-        <div class="row isotope-grid">
-            @foreach (var item in Model)
-            {
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="~/Content/Images/@item.ImagePro" alt="IMG-PRODUCT">
-
-                            <a href="@Url.Action("Details", "Home", new { id = item.ProductID })" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-                                Xem
-                            </a>
-                        </div>
-
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l ">
-                                <a href="@Url.Action("Details", "Home", new { id = item.ProductID })" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    @item.NamePro
-                                </a>
-
-                                <span class="stext-105 cl3">
-                                    @string.Format("{0:#,##0} VND", item.Price)
-                                </span>
-                            </div>
-
-                            <div class="block2-txt-child2 flex-r p-t-3">
-                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                    <img class="icon-heart1 dis-block trans-04" src="~/Content/assetss/images/icons/icon-heart-01.png" alt="ICON">
-                                    <img class="icon-heart2 dis-block trans-04 ab-t-l" src="~/Content/assetss/images/icons/icon-heart-02.png" alt="ICON">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            }
-
-        </div>
-        <nav aria-label="..." style="margin-right: 20px;">
-            <ul class="pagination pagination-sm justify-content-end">
-                <li class="page-item @if (Model.PageNumber == 1) { <text>disabled</text> }">
-                    <a class="page-link" href="@Url.Action("Index", "Home", new { page = 1 })" tabindex="-1">1</a>
-                </li>
-                @for (int i = 2; i <= Model.PageCount; i++)
-                {
-                    <li class="page-item @if (Model.PageNumber == i) { <text>active</text> }">
-                        <a class="page-link" href="@Url.Action("Index", "Home", new { page = i })">@i</a>
-                    </li>
-                }
-            </ul>
-        </nav>
     </div>
-
 </section>
+<!-- ================ end banner area ================= -->
+<!-- ================ category section start ================= -->
+<section class="section-margin--small mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-5">
+                <div class="sidebar-categories">
+                    <div class="head">Browse Categories</div>
+                    <ul class="main-categories">
+                        <li class="common-filter">
+                            <form value="/Product/Index" action="#">
+                                <ul>
+                                    @Html.Action("CategoryPartial", "Category")
+                                </ul>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div class="col-xl-9 col-lg-8 col-md-7">
+                <!-- Start Best Seller -->
+                <section class="lattest-product-area pb-40 category-list">
+                    <div class="row">
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card text-center card-product">
+                                        <div class="card-product__img">
+                                            <img class="card-img" src="~/Content/Images/@item.ImagePro" alt="">
+
+                                            <ul class="card-product__imgOverlay">
+                                                <li>
+                                                    <a href="/ShoppingCart/AddToCart/@item.ProductID">
+                                                        <i class="ti-shopping-cart"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                        <div class="card-body">
+                                            <p>@item.Category1.NameCate</p>
+                                            <h4 class="card-product__title"><a href="/Home/Details/@item.ProductID">@item.NamePro</a></h4>
+                                            <p class="card-product__price">@item.Price.Value.ToString("#,##") ₫</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </section>
+                <!-- End Best Seller -->
+            </div>
+        </div>
+    </div>
+    <nav aria-label="..." style="margin-right: 20px;">
+        <ul class="pagination pagination-sm justify-content-end">
+            <li class="page-item @if (Model.PageNumber == 1) { <text>disabled</text> }">
+                <a class="page-link" href="@Url.Action("Index", "Home", new { page = 1 })" tabindex="-1">1</a>
+            </li>
+            @for (int i = 2; i <= Model.PageCount; i++)
+            {
+                <li class="page-item @if (Model.PageNumber == i) { <text>active</text> }">
+                    <a class="page-link" href="@Url.Action("Index", "Home", new { page = i })">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+    </div>
+</section>
+<!-- ================ category section end ================= -->

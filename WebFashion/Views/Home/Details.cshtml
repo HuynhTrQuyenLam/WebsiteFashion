@@ -5,63 +5,47 @@
 }
 
 
-
-<!-- Product Detail -->
-<section class="sec-product-detail bg0 p-t-65 p-b-60">
-    <div class="container">
-        <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-            <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
-                Home
-                <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-            </a>
-
-            <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
-                Men
-                <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-            </a>
-
-            <span class="stext-109 cl4">
-                Lightweight Jacket
-            </span>
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="blog">
+    <div class="container h-100">
+        <div class="blog-banner">
+            <div class="text-center">
+                <h1>Detail Product</h1>
+            </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-6 col-lg-7 p-b-30">
-                <div class="p-l-25 p-r-30 p-lr-0-lg">
-                    <div class="wrap-slick3 flex-sb flex-w">
-
-                        <div class="slick3 gallery-lb">
-                            <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
-                                <div class="wrap-pic-w pos-relative">
-                                    <img src="~/Content/Images/@Model.ImagePro" alt="IMG-PRODUCT" />
-                                </div>
-                            </div>
-                        </div>
+    </div>
+</section>
+<!-- ================ end banner area ================= -->
+<!--================Single Product Area =================-->
+<div class="product_image_area">
+    <div class="container">
+        <div class="row s_product_inner">
+            <div class="col-lg-6">
+                <div class="owl-carousel owl-theme s_Product_carousel">
+                    <div class="single-prd-item">
+                        <img class="img-fluid" src="@Url.Content("~/Content/Images/" + Model.ImagePro)">
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-6 col-lg-5 p-b-30">
-                <div class="p-r-50 p-t-5 p-lr-0-lg">
-                    <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                        @Model.NamePro
-                    </h4>
-
-                    <span class="mtext-106 cl2">
-                        @string.Format("{0:#,##0} VND", Model.Price)
-                    </span>
-
-                    <p class="stext-102 cl3 p-t-23">
+            <div class="col-lg-5 offset-lg-1">
+                <div class="s_product_text">
+                    <h3>@Model.NamePro</h3>
+                    <h2>@Model.Price.Value.ToString("#,##") ₫</h2>
+                    <ul class="list">
+                        <li><a class="active" href="#"><span>Category</span> : @Model.Category1.NameCate</a></li>
+                        <li><a href="#"><span>Availibility</span> : In Stock</a></li>
+                    </ul>
+                    <p>
                         @Model.DecriptionPro
                     </p>
-
-                    <!--  -->
+                    <div class="product_count">
+                        <a class="button primary-btn" href="/ShoppingCart/AddToCart/@Model.ProductID">Add to Cart</a>
+                    </div>
                     <div class="p-t-33">
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-203 flex-c-m respon6">
                                 Size
                             </div>
-
                             <div class="size-204 respon6-next">
                                 <div class="rs1-select2 bor8 bg0">
                                     <select class="js-select2" name="time">
@@ -75,72 +59,113 @@
                                 </div>
                             </div>
                         </div>
-
-
-                        <div class="flex-w flex-r-m p-b-10">
-                            <div class="size-204 flex-w flex-m respon6-next">
-                                <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                        <i class="fs-16 zmdi zmdi-minus"></i>
-                                    </div>
-
-                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                        <i class="fs-16 zmdi zmdi-plus"></i>
-                                    </div>
-                                </div>
-
-                                <a href="/ShoppingCart/AddToCart/@Model.ProductID" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                    Add to cart
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="bor10 m-t-50 p-t-43 p-b-40">
-            <!-- Tab01 -->
-            <div class="tab01">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item p-b-10">
-                        <a class="nav-link active" data-toggle="tab" href="~/Content/assetss/#description" role="tab">Mô Tả</a>
-                    </li>
-
-                    
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content p-t-43">
-                    <!-- - -->
-                    <div class="tab-pane fade show active" id="description" role="tabpanel">
-                        <div class="how-pos2 p-lr-15-md">
-                            <p class="stext-102 cl6">
-                                @Model.DecriptionPro                     
-                        </div>
-                    </div>
-
-                    <!-- - -->
-
-                </div>
-            </div>
         </div>
     </div>
-
-    <div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-        <span class="stext-107 cl6 p-lr-25">
-            SKU: JAK-01
-        </span>
-
-        <span class="stext-107 cl6 p-lr-25">
-            Categories: Jacket, Men
-        </span>
+</div>
+<!--================End Single Product Area =================--><!--================Product Description Area =================-->
+<section class="product_description_area">
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link  active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Giới thiệu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                   aria-selected="false">Mô tả</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <p>
+                    @Model.DecriptionPro
+                </p>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h5>Width</h5>
+                                </td>
+                                <td>
+                                    <h5>128mm</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Height</h5>
+                                </td>
+                                <td>
+                                    <h5>508mm</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Depth</h5>
+                                </td>
+                                <td>
+                                    <h5>85mm</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Weight</h5>
+                                </td>
+                                <td>
+                                    <h5>52gm</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Quality checking</h5>
+                                </td>
+                                <td>
+                                    <h5>yes</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Freshness Duration</h5>
+                                </td>
+                                <td>
+                                    <h5>03days</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>When packeting</h5>
+                                </td>
+                                <td>
+                                    <h5>Without touch of hand</h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Each Box contains</h5>
+                                </td>
+                                <td>
+                                    <h5>60pcs</h5>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+<!--================End Product Description Area =================-->
 
+<script src="~/Content/Home/vendors/jquery/jquery-3.2.1.min.js"></script>
+<script src="~/Content/Home/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="~/Content/Home/vendors/skrollr.min.js"></script>
+<script src="~/Content/Home/vendors/owl-carousel/owl.carousel.min.js"></script>
+<script src="~/Content/Home/vendors/nice-select/jquery.nice-select.min.js"></script>
+<script src="~/Content/Home/vendors/jquery.ajaxchimp.min.js"></script>
+<script src="~/Content/Home/vendors/mail-script.js"></script>
+<script src="~/Content/Home/js/main.js"></script>
 
-<!-- Related Products -->
 

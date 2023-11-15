@@ -8,6 +8,7 @@
     <h2 class="header-title">Product</h2>
     <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
+
             <a href="/Product/Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Product</a>
             <span class="breadcrumb-item active">Tạo mới Product</span>
         </nav>
@@ -33,7 +34,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="font-weight-semibold" for="inputState">Tên sản phẩm</label>
-                            @Html.EditorFor(model => model.NamePro, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên sản phẩm" } })
+                            @Html.EditorFor(model => model.NamePro, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên sản phẩm", required = "required" } })
                             @Html.ValidationMessageFor(model => model.NamePro, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
@@ -43,12 +44,13 @@
                         </div>
                         <div class="form-group">
                             <label class="font-weight-semibold" for="inputState">Giá sản phẩm</label>
-                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "Giá sản phẩm" } })
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "Giá sản phẩm", required = "required" } })
                             @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
                             <label class="font-weight-semibold" for="inputState">Số lượng</label>
-                            <input type="number" min="0" @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "Số lượng" } }) @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                            <input type="number" min="1" @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "Số lượng", required = "required" } }) 
+                                   @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
                             <label class="font-weight-semibold">Trạng thái</label>
@@ -61,16 +63,11 @@
                             <label class="font-weight-semibold" for="inputState">Mô tả</label>
                             @Html.EditorFor(model => model.DecriptionPro, new { htmlAttributes = new { @class = "form-control", placeholder = "Mô tả" } })
                             @Html.ValidationMessageFor(model => model.DecriptionPro, "", new { @class = "textarea" })
-
-                            <div id="editor">
-                                <p><br></p>
-                            </div>
                         </div>
                         <div class="form-group">
                             <label class="font-weight-semibold">Hình ảnh</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="UploadImage" id="formFile" onchange="ChangeImage(this, document.getElementById('previewImg'))">
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <input type="file" class="form-control" name="UploadImage" onchange="ChangeImage(this, document.getElementById('previewImg'))">
                             </div>
                         </div>
                     </div>

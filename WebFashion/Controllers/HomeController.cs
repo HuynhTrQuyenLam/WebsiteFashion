@@ -14,7 +14,12 @@ namespace WebFashion.Controllers
     public class HomeController : Controller
     {
         public DBFashionEntities db = new DBFashionEntities();
-        public ActionResult Index(string category, int? page, string SearchString, double min = double.MinValue, double max = double.MaxValue)
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Shop(string category, int? page,string SearchString, double min = double.MinValue, double max = double.MaxValue)
         {
             var products = db.Products.Include(p => p.Category);
             if (category == null)
@@ -31,13 +36,7 @@ namespace WebFashion.Controllers
             {
                 products = db.Products.OrderByDescending(x => x.ProductID).Where(s => s.NamePro.Contains(SearchString.Trim()));
             }
-            // Tìm kiếm chuỗi truy vấn theo đơn giá
-            if (min >= 0 && max > 0)
-            {
-                products = db.Products.OrderByDescending(x => x.Price).Where(p => (double)p.Price >= min && (double)p.Price <= max);
-            }
-
-            int pageSize = 12;
+            int pageSize = 6;
             int pageNumber = (page ?? 1);
             if (page == null) page = 1;
             return View(products.ToPagedList(pageNumber, pageSize));

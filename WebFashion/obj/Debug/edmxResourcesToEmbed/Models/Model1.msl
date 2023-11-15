@@ -57,7 +57,7 @@
           <ScalarProperty Name="PhoneCus" ColumnName="PhoneCus" />
           <ScalarProperty Name="AddressDeliverry" ColumnName="AddressDeliverry" />
           <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="isPaid" ColumnName="isPaid" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

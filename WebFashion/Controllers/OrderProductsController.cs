@@ -25,5 +25,12 @@ namespace WebFashion.Controllers
             var items = db.OrderDetails.Where(x => x.IDOrder == id).ToList();
             return PartialView(items);
         }
+        public ActionResult Accept(int ID)
+        {
+            OrderPro _order = db.OrderProes.Find(ID);
+            _order.Status = 1;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -1,4 +1,8 @@
 -- Bang AdminUser
+use DBFashion
+
+
+-- Bang AdminUser
 CREATE TABLE [dbo].[AdminUser] (
     [ID]           INT     IDENTITY (1, 1) NOT NULL,
     [NameUser]     NVARCHAR (500) NULL,
@@ -30,7 +34,7 @@ CREATE TABLE [dbo].[Products] (
     [ProductID]     INT             IDENTITY (1, 1) NOT NULL,
     [NamePro]       NVARCHAR (MAX)  NULL,
     [DecriptionPro] NVARCHAR (MAX)  NULL,
-    [Category]      NVARCHAR (20)   NULL,
+    [Category]      NVARCHAR (20)	NULL,
     [Price]         DECIMAL (19, 4) NULL,
     [ImagePro]      NVARCHAR (MAX)  NULL,
     [Quantity]      INT        	NULL,
@@ -46,7 +50,7 @@ CREATE TABLE [dbo].[OrderPro] (
     [NameCus]          NVARCHAR (250) NULL,
     [PhoneCus]	     NVARCHAR (15)  NULL,
     [AddressDeliverry] NVARCHAR (MAX) NULL,
-	[Status]			NVARCHAR(50) NULL,
+	[Status]			int NULL,
 	[IsPaid]			bit NULL,
     PRIMARY KEY CLUSTERED ([ID] ASC),
     FOREIGN KEY ([IDCus]) REFERENCES [dbo].[Customer] ([IDCus])
@@ -64,4 +68,7 @@ CREATE TABLE [dbo].[OrderDetail] (
     FOREIGN KEY ([IDProduct]) REFERENCES [dbo].[Products] ([ProductID]),
     FOREIGN KEY ([IDOrder]) REFERENCES [dbo].[OrderPro] ([ID])
 );
+
+
+
 

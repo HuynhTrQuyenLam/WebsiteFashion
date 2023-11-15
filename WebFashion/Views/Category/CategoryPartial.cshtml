@@ -2,9 +2,10 @@
 
 @foreach (var item in Model)
 {
-    <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-        <a  class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-            @Html.ActionLink(item.NameCate, "Homecate", "Home", new { category = item.IDCate.Trim() }, null)
-        </a>
-    </div>
+<li class="filter-list">
+    <input class="pixel-radio" type="radio" id="men" name="brand">
+    <a style="color: #777" href="@Url.Action("Homecate", "Home", new { category = item.Id })" 
+       for="men">@item.NameCate</a>
+</li>
+
 }

@@ -24,28 +24,44 @@
                         <th>Date</th>
                         <th>Phone Number</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                #@Html.DisplayFor(modelItem => item.ID)
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <h6 class="m-b-0">@Html.DisplayFor(modelItem => item.NameCus)</h6>
-                                </div>
-                            </td>
-                            <td>@Html.DisplayFor(modelItem => item.DateOrder)</td>
-                            <td>@Html.DisplayFor(modelItem => item.PhoneCus)</td>
-                            <td class="text">
-                                <a href="@Url.Action("Detail", new { id = item.ID })" class="btn btn-icon btn-hover btn-sm btn-rounded">
-                                    <i class="anticon anticon-info"></i>
-                                </a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            #@item.ID
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <h6 class="m-b-0">@item.NameCus</h6>
+                            </div>
+                        </td>
+                        <td>@item.DateOrder</td>
+                        <td>@item.PhoneCus</td>
+                        @{
+                            if (@item.Status == 0)
+                            {
+                                <td><a href="/OrderProducts/Accept/@item.ID" type="button" class="btn btn-warning">Xác nhận</a></td>
+                            }
+                            else if (@item.Status == 1)
+                            {
+                                <td><button type="button" class="btn btn-primary">Đã xác nhận</button></td>
+                            }
+                            else if (@item.Status == 2)
+                            {
+                                <td><button type="button" class="btn btn-danger">Đã hủy</button></td>
+                            }
+
+                        }
+                        <td class="text">
+                            <a href="/OrderProducts/Detail/@item.ID" class="btn btn-icon btn-hover btn-sm btn-rounded">
+                                <i class="anticon anticon-info"></i>
+                            </a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
